@@ -28,11 +28,11 @@ vim /etc/locale.gen
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
-echo cannabis(hostname) > /etc/hostname
+echo cannabis > /etc/hostname // cannabis used for hostname
 vim /etc/hosts
     127.0.0.1	localhost
     ::1		localhost
-    127.0.1.1	myhostname.localdomain	myhostname
+    127.0.1.1	cannabis.localdomain	cannabis // cannabis used for myhostname
 passwd
     13
     13
