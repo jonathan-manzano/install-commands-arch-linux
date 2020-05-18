@@ -22,8 +22,6 @@ reflector -c US -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel linux linux-firmware vim nano vi dhcpcd grub xorg reflector virtualbox-guest-utils xf86-video-vmware
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-reflector -c US -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 hwclock --systohc
 vim /etc/locale.gen
