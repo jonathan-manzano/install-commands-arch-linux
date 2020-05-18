@@ -1,0 +1,54 @@
+ip link
+ping archlinux.org
+timedatectl set-ntp true
+cfdisk
+    dos
+    Select free space and have 4G less that total free space
+    Bootable
+    Select remain free space
+    Select Type
+    Select 82 Swap
+    Select Write
+    enter yes
+    select quit
+mkfs.ext /dev/sda1
+mkswap /dev/sda2
+swapon /dev/sda2
+mount /dev/sda1 /mnt
+pacman -Syy
+pacman -S reflector
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+reflector -c US -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
+pacstrap mnt base base-devel linux linux-firmware vim nano vi dhcpcd grub xorg reflector virtualbox-guest-utils xf86-video-vmware
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+reflector -c US -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
+ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+hwclock --systohc
+vim /etc/locale.gen
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+echo cannabis(hostname) > /etc/hostname
+vim /etc/hosts
+    127.0.0.1	localhost
+    ::1		localhost
+    127.0.1.1	myhostname.localdomain	myhostname
+passwd
+    13
+    13
+grub-install --target=i386-pc /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+useradd -m yanni
+passwd yanni
+usermod -aG wheel,audio,video,optical,storage yanni
+visudo
+    Uncomment "%wheel ALL=(ALL) ALL
+exit
+unmount -R /mnt
+shutdown now
+pacman -S lightdm lightdm-gtk-greeter xfce4
+sudo systemctl enable lightdm
+pacman -S alacritty firefox zsh
+chsh -s /usr/bin/zsh
