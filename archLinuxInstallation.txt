@@ -43,6 +43,7 @@ passwd yanni
 usermod -aG wheel,audio,video,optical,storage yanni
 visudo
     Uncomment "%wheel ALL=(ALL) ALL
+systemctl enable dhcpcd
 exit
 umount -R /mnt
 shutdown now
