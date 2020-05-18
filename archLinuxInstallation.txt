@@ -44,7 +44,7 @@ usermod -aG wheel,audio,video,optical,storage yanni
 visudo
     Uncomment "%wheel ALL=(ALL) ALL
 exit
-unmount -R /mnt
+umount -R /mnt
 shutdown now
 pacman -S lightdm lightdm-gtk-greeter xfce4
 sudo systemctl enable lightdm
